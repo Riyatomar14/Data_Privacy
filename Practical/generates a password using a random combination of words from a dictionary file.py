@@ -1,3 +1,4 @@
+import random
 my_dict = {
     1: "alpha",
     2: "bravo",
