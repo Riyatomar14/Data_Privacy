@@ -20,3 +20,22 @@ print (f"attempt: {attempt}")
 
 
 # using string
+import itertools
+
+def brute_force_numeric(password, max_length=6):
+    digits = '0123456789'
+    attempts = 0
+
+    for length in range(1, max_length + 1):
+        for guess in map(''.join, itertools.product(digits, repeat=length)):
+            attempts += 1
+            if guess == password:
+                print(f"Password found: {guess}")
+                print(f"Attempts: {attempts}")
+                return guess
+    print("Password not found.")
+    return None
+
+# Example usage
+password = "1234"
+brute_force_numeric(password, max_length=4)
