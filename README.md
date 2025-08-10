@@ -6,6 +6,6 @@
 
 * random.choices(population, k) selects k elements with replacement, meaning the same element can be picked multiple times. This allows duplicates in the output and k can be greater than the population size.
 
-* We’re using itertools.product() to generate all possible combinations of digits for a given length.
+## We’re using itertools.product() to generate all possible combinations of digits for a given length.
 
-* The Python map() function applies a given function to every item of an iterable (like a list, tuple, or string) and returns a map object, which is an iterator over the results. It allows you to transform each element in the iterable without using an explicit loop.
+## The Python map() function applies a given function to every item of an iterable (like a list, tuple, or string) and returns a map object, which is an iterator over the results. It allows you to transform each element in the iterable without using an explicit loop.
