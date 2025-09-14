@@ -458,7 +458,7 @@ Store: (Salt, Hash)
 
 ## Message Digest, Integrity & Confidentiality
 
-### Message Digest
+### 1.Message Digest
 A **Message Digest** is the fixed-length output of a cryptographic hash function (like **SHA-256**).  
 It represents the **fingerprint** of the original message.
 
