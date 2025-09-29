@@ -1,4 +1,4 @@
-# 🔑 Cryptographic Keys Overview
+# 🔑 Cryptographic Keys 
 
 A **cryptographic key** is a unique string of bits used in algorithms to keep information secure by enabling encryption and decryption. It is fundamental to **authentication, confidentiality, and integrity** in digital communication.
 
@@ -27,7 +27,7 @@ A **cryptographic key** is a unique string of bits used in algorithms to keep in
 - **PKI (Public Key Infrastructure):** System for managing public/private keys and digital certificates.  
 - **Digital Certificate:** Electronic credential issued by a Certificate Authority (CA) that binds a public key to an entity.
 
-## Key-Life Cycle
+# Key-Life Cycle
 ------
 #### 1. key Generation
 
