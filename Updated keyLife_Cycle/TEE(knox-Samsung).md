@@ -292,7 +292,7 @@ Before processing the ciphertext, the TEE checks:
 
 ---
 
-# 🌟 Key Takeaways (Expanded)
+# 🌟 Key Takeaways
 - Normal World vs Secure World separation guarantees safety.
 - Secure Boot + Tamper Sensors verify device integrity every time.
 - Key Handles + Authorization ensure only the correct app can decrypt.
