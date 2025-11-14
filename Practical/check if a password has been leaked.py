@@ -1,64 +1,54 @@
-# input file - as users.txt
+# input file - as 'users.txt'
 
-alice,Password123
-bob,123456
-charlie,my-secret-pass
+user1,password123
+riya,844riat
+admin,admin123
 
 
 
-import hashlib
-import requests
+import hashlib   # SHA1
+import requests  # To make HTTP requests to the HIBP API.
 
-def sha1_hash(password: str) -> str:
-    """Return the SHA-1 hash of a password in uppercase hexadecimal."""
-    return hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
+def check_pwned(password: str) -> int:
+    # SHA1 hash of password
+    sha1 = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
 
-def check_pwned_password(password: str) -> int:
-    """
-    Checks password against Have I Been Pwned API.
-    Returns: number of times it appears in breaches (0 = not found).
-    """
-    # Hash password
-    sha1 = sha1_hash(password)
-    prefix = sha1[:5]
-    suffix = sha1[5:]
+    prefix = sha1[:5]     # first 5 chars
+    suffix = sha1[5:]     # rest of the chars
 
-    # HIBP API range endpoint
+    # Query Have I Been Pwned API
     url = f"https://api.pwnedpasswords.com/range/{prefix}"
-
-    # Query API
     response = requests.get(url)
+
     if response.status_code != 200:
-        raise RuntimeError(f"API error: {response.status_code}")
+        raise RuntimeError("Error fetching from API")
 
-    # The response contains many suffixes and counts
-    hashes = (line.split(':') for line in response.text.splitlines())
-
-    for hash_suffix, count in hashes:
+    # Search if suffix exists in API response
+    hashes = response.text.splitlines()
+    for line in hashes:
+        hash_suffix, count = line.split(":")
         if hash_suffix == suffix:
             return int(count)
 
-    return 0  # Not found
+    return 0  # password NOT found in breaches
 
 
-def check_password_file(filename: str):
-    with open(filename, "r") as f:
-        for line in f:
-            line = line.strip()
-            if not line or "," not in line:
-                continue
+def main():
+    filename = "users.txt"
+    print("Checking passwords from file:", filename)
+    print("------------------------------------")
 
-            username, password = line.split(",", 1)
-            username = username.strip()
-            password = password.strip()
+    with open(filename, "r") as file:
+        for line in file:
+            username, password = line.strip().split(",")
 
-            count = check_pwned_password(password)
+            count = check_pwned(password)
 
             if count > 0:
                 print(f"[LEAKED]  User: {username} | Password found {count} times!")
             else:
-                print(f"[SAFE]    User: {username} | Password not found.")
-            
+                print(f"[SAFE]    User: {username} | Password NOT found.")
+
 
 if __name__ == "__main__":
-    check_password_file("users.txt")
+    main()
